@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('auth_forms.css') }}">
+{% endblock %}
+{% block content %}
+    <div></div>
+    <div>
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        {% endfor %}
+
+        {{ form_start(registrationForm, {attr:{class:'signup-form'}}) }}
+        <h1 class="h2 mb-3 font-weight-normal">Please, sign up</h1>
+        <div>
+            {{ form_errors(registrationForm) }}
+            {{ form_errors(registrationForm.name) }}
+            {{ form_errors(registrationForm.email) }}
+            {{ form_errors(registrationForm.password.first) }}
+        </div>
+
+        <div>
+            {{ form_widget(registrationForm.name, {attr:{placeholder: 'Name'}}) }}
+        </div>
+        <div>
+            {{ form_widget(registrationForm.email, {attr:{placeholder: 'Email'}}) }}
+        </div>
+        <div>
+            {{ form_widget(registrationForm.password.first, {attr:{placeholder: 'Password'}}) }}
+        </div>
+        <div>
+            {{ form_widget(registrationForm.password.second, {attr:{placeholder: 'Confirm password'}}) }}
+        </div>
+        <button type="submit" class="btn">Register</button>
+        <hr>
+        <h1 class="h6 mb-3 font-weight-normal">
+            Already have an account?
+            <a href="{{ path('app_login') }}">Login</a>
+        </h1>
+        {{ form_end(registrationForm) }}
+
+    </div>
+
+{% endblock %}
