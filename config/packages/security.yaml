@@ -16,8 +16,8 @@ security:
             security: false
         main:
             access_denied_handler: App\Security\AccessDeniedHandler
-#            pattern: ^/
-            anonymous: false
+            pattern: ^/
+            anonymous: true
             lazy: true
             provider: app_user_provider
             guard:
@@ -37,10 +37,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-#         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/users, allow_if: "is_granted('ROLE_USER') and user.isActive() and !user.isDeleted()"}
-#        - { path: ^/users, roles: ROLE_USER}
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY}
-        - { path: ^/registration, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY}
